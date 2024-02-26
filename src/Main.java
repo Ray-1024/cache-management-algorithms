@@ -27,8 +27,10 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         Path.of("./report/").toFile().mkdirs();
-        lab(new FifoCacheManager(5), new PrintWriter(Path.of("./report/fifo.txt").toFile()));
-        lab(new LruCacheManager(5), new PrintWriter(Path.of("./report/lru.txt").toFile()));
-        lab(new OptimumCacheManager(5, pages), new PrintWriter(Path.of("./report/optimum.txt").toFile()));
+        int pageFrames = 5;
+        // 18 for 5% faults for optimum algorithm
+        lab(new FifoCacheManager(pageFrames), new PrintWriter(Path.of("./report/fifo.txt").toFile()));
+        lab(new LruCacheManager(pageFrames), new PrintWriter(Path.of("./report/lru.txt").toFile()));
+        lab(new OptimumCacheManager(pageFrames, pages), new PrintWriter(Path.of("./report/optimum.txt").toFile()));
     }
 }
