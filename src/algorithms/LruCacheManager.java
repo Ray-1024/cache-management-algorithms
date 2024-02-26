@@ -23,7 +23,7 @@ public class LruCacheManager extends FifoCacheManager {
                 lastAccessTime.addLast(currentAccessTime++);
             } else {
                 pageFaults++;
-                int min = lastAccessTime.stream().min(Integer::compareTo).orElseThrow();
+                int min = lastAccessTime.stream().min(Integer::compare).orElseThrow();
                 int index = lastAccessTime.indexOf(min);
                 pages.set(index, pageNumber);
                 lastAccessTime.set(index, currentAccessTime++);

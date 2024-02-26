@@ -18,10 +18,9 @@ public class Main {
         for (int i = 0; i < pages.size(); i++) {
             int page = pages.get(i);
             cacheManager.needPage(page);
-            writer.print(i + "| Need page №" + page + " | cache=");
-            writer.println(cacheManager);
+            writer.printf("%d: page №%d => %s\n", i, page, cacheManager);
         }
-        writer.println("Page Faults: " + cacheManager.getPageFaults());
+        writer.printf("Page Faults: %d", cacheManager.getPageFaults());
         writer.close();
     }
 
