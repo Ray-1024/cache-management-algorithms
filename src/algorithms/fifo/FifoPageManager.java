@@ -1,10 +1,12 @@
-package algorithms;
+package algorithms.fifo;
 
-public class FifoCacheManager extends AbstractCacheManager {
+import algorithms.AbstractPageManager;
+
+public class FifoPageManager extends AbstractPageManager {
 
     private int outIndex = 0;
 
-    public FifoCacheManager(int pagesCount) {
+    public FifoPageManager(int pagesCount) {
         super(pagesCount);
     }
 
@@ -13,7 +15,7 @@ public class FifoCacheManager extends AbstractCacheManager {
         if (!pages.contains(pageNumber)) {
             if (pages.size() < pagesCapacity) pages.addLast(pageNumber);
             else {
-                pageFaults++;
+                pageMisses++;
                 pages.set(outIndex, pageNumber);
                 outIndex = (outIndex + 1) % pagesCapacity;
             }

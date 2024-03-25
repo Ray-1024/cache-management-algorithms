@@ -1,14 +1,16 @@
-package algorithms;
+package algorithms.lru;
+
+import algorithms.fifo.FifoPageManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LruCacheManager extends FifoCacheManager {
+public class LruPageManager extends FifoPageManager {
 
     private final List<Integer> lastAccessTime;
     private int currentAccessTime;
 
-    public LruCacheManager(int pagesCount) {
+    public LruPageManager(int pagesCount) {
         super(pagesCount);
         lastAccessTime = new ArrayList<>(pagesCount);
     }
@@ -22,7 +24,7 @@ public class LruCacheManager extends FifoCacheManager {
                 pages.addLast(pageNumber);
                 lastAccessTime.addLast(currentAccessTime++);
             } else {
-                pageFaults++;
+                pageMisses++;
                 int min = lastAccessTime.stream().min(Integer::compare).orElseThrow();
                 int index = lastAccessTime.indexOf(min);
                 pages.set(index, pageNumber);

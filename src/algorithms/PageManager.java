@@ -1,7 +1,5 @@
 package algorithms;
 
-public interface CacheManager {
+public interface PageManager {
     void needPage(int pageNumber);
-
-    int getPageFaults();
 }

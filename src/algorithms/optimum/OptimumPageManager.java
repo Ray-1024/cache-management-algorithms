@@ -1,13 +1,14 @@
-package algorithms;
+package algorithms.optimum;
 
-import java.util.ArrayList;
+import algorithms.AbstractPageManager;
+
 import java.util.List;
 
-public class OptimumCacheManager extends AbstractCacheManager {
-    private List<Integer> queries;
+public class OptimumPageManager extends AbstractPageManager {
+    private final List<Integer> queries;
     private int currentAccessTime;
 
-    public OptimumCacheManager(int pagesCount, List<Integer> queries) {
+    public OptimumPageManager(int pagesCount, List<Integer> queries) {
         super(pagesCount);
         this.queries = queries;
     }
@@ -24,7 +25,7 @@ public class OptimumCacheManager extends AbstractCacheManager {
         if (!pages.contains(pageNumber)) {
             if (pages.size() < pagesCapacity) pages.addLast(pageNumber);
             else {
-                pageFaults++;
+                pageMisses++;
                 var distances = pages.stream().map(this::lengthToNext).toList();
                 int max = distances.stream().max(Integer::compare).orElseThrow();
                 int index = distances.indexOf(max);
